@@ -1,4 +1,4 @@
-name: Add new issues to Opsci GRMP Project
+name: Add new issues to Opsci Project
 
 on:
   issues:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to project
-        uses: actions/add-to-project@v1.0.2
+        uses: actions/add-to-project@v1
         with:
-          project-url: https://github.com/orgs/vliz-be-opsci/projects/13
+          project-id: PVT_kwDOBW-9B84BOGFj
           github-token: ${{ secrets.GITHUB_TOKEN }}
