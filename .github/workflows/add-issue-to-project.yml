@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to project
-        uses: actions/add-to-project@v1
+        uses: actions/add-to-project@v1.0.2
         with:
           project-id: PVT_kwDOBW-9B84BOGFj
           github-token: ${{ secrets.GITHUB_TOKEN }}
