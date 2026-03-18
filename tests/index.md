@@ -5,3 +5,4 @@
 * 002 - [Check Certificate](check-certificate.md)
 * 003 - [CORS Compliance](cors-compliance.md)
 * 004 - [Content Negotiation](content-negotiation.md)
+* 005 - [LDES Tests](ldes-tests.md)
