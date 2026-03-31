@@ -7,7 +7,8 @@ This test will check the compliance of a [Linked Data Event Stream (LDES)](https
    2. Response uses a supported RDF content type (e.g., `text/turtle`, `application/ld+json`)
 2. LDES metadata is present
    1. `ldes:timestampPath` is defined
-   2. `ldes:versionOfPath` is defined (optional, for versioned streams)
+   2. `ldes:versionOfPath` is defined
+   3. Member type is inferred from the LDES feed itself
 3. Tree (pagination) compliance
    1. Root node is typed as `tree:Node`
    2. `tree:member` predicates are present (or linked via `tree:view`)
@@ -17,18 +18,19 @@ This test will check the compliance of a [Linked Data Event Stream (LDES)](https
       3. Navigation through all relations/pages is possible without errors
 4. Member validation
    1. Members are valid RDF
-   2. Members conform to the expected type (`shape` or `memberType` if configured)
+   2. Members conform to the expected type (inferred from the LDES feed)
+   3. If `shape_validation_file` is configured, each member is validated against the given SHACL shape file
 
 ### MoSCow:
 
 | Number | Name                                      | MoSCoW |
 |--------|-------------------------------------------|--------|
 | 1      | Valid LDES stream                         | Must   |
-| 2.1    | ldes:timestampPath present                | Should |
-| 2.2    | ldes:versionOfPath present                | Could  |
+| 2.1    | ldes:timestampPath present                | Must   |
+| 2.2    | ldes:versionOfPath present                | Must   |
 | 3.1    | Root node typed as tree:Node              | Must   |
 | 3.2    | tree:member or tree:view present          | Must   |
-| 3.3    | tree:Relation navigation                  | Should |
+| 3.3    | tree:Relation navigation                  | Must   |
 | 4.1    | Members are valid RDF                     | Must   |
 | 4.2    | Members conform to expected type/shape    | Could  |
 
@@ -39,6 +41,8 @@ test:
     image: ghcr.io/grmp-tests/ldes-tests:latest
     config:
       url: https://brugge-ldes.geomobility.eu/observations
-      member-type: https://schema.org/Observation
-      check-member-conformity: false
+      min_fragment: 1
+      min_members: 10
+      shape_validation_file: https://example.org/shapes/observation.ttl
+      min_last_modified_date: 2024-01-01T00:00:00Z
 ```
